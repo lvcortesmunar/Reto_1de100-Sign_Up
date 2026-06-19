@@ -18,7 +18,10 @@ function SignUpForm() {
   }
 
   return (
-    <form onSubmit={manejarEnvio}>
+    <form 
+  onSubmit={manejarEnvio} 
+  className="bg-blue-500 p-8 rounded-lg"
+>
       <h2>Registro</h2>
       <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
       <input type="email" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} />
