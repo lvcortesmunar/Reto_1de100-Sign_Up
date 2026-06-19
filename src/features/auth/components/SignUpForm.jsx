@@ -3,8 +3,13 @@ import { useState } from 'react'
 function SignUpForm() {
   const [nombre, setNombre] = useState('')
 
+  const manejarEnvio = (evento) => {
+    evento.preventDefault() // Detiene el comportamiento por defecto
+    alert(`Enviado: ${nombre}`)
+  }
+
   return (
-    <form>
+    <form onSubmit={manejarEnvio}>
       <h2>Registro</h2>
       <input 
         type="text" 
@@ -12,7 +17,7 @@ function SignUpForm() {
         value={nombre}
         onChange={(e) => setNombre(e.target.value)}
       />
-      <p>Hola, {nombre}</p>
+      <p>Hola, mi nombre es {nombre}.</p>
       <button type="submit">Enviar</button>
     </form>
   )
