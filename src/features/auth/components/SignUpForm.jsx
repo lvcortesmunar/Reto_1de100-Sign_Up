@@ -1,34 +1,24 @@
-import { useForm } from '../../../hooks/useForm';
-import { registerUser } from '../services/authService';
-import { validateSignUp } from '../../../utils/validation'; // Asegúrate de ajustar esta ruta
+import { useSignUp } from '../hooks/useSignUp';
 
-export const SignUpForm = () => {
-  const { values, handleInputChange } = useForm({ nombre: '', correo: '', password: '' });
+function SignUpForm() {
+  const { formData, handleChange, validate } = useSignUp();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    // 1. Validamos antes de hacer nada
-    const errors = validateSignUp(values);
-
-    // 2. Si hay errores (si el objeto errors no está vacío), frenamos
-    if (Object.keys(errors).length > 0) {
-      alert("Errores: " + Object.values(errors).join(', '));
-      return;
+    if (validate()) {
+      alert("Registro exitoso!");
+    } else {
+      alert("Datos inválidos");
     }
-
-    // 3. Si todo está bien, enviamos los datos
-    const respuesta = await registerUser(values);
-    alert(respuesta.message);
   };
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <h2>Registro</h2>
-      <input className="input-field" name="nombre" placeholder="Nombre" value={values.nombre} onChange={handleInputChange} />
-      <input className="input-field" name="correo" placeholder="Correo" value={values.correo} onChange={handleInputChange} />
-      <input className="input-field" name="password" type="password" placeholder="Contraseña" value={values.password} onChange={handleInputChange} />
-      <button className="btn-enviar" type="submit">Enviar</button>
+    <form onSubmit={handleSubmit}>
+      <input name="nombre" placeholder="Nombre" onChange={handleChange} />
+      <input name="email" type="email" placeholder="Email" onChange={handleChange} />
+      <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} />
+      <button type="submit">Enviar</button>
     </form>
   );
-};
+}
+export default SignUpForm;
