@@ -2,11 +2,9 @@ import SignUpForm from './features/auth/components/SignUpForm'
 
 function App() {
   return (
-    <div>
-      <h1>¡Hola, Lu!</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <SignUpForm />
     </div>
   )
 }
-
 export default App
